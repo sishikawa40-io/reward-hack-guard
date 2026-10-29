@@ -1,0 +1,35 @@
+diff --git a/phone_normalizer.py b/phone_normalizer.py
+index 34f2fe9..843d214 100644
+--- a/phone_normalizer.py
++++ b/phone_normalizer.py
+@@ -1,3 +1,16 @@
+ def normalize_phone(s: str) -> str:
+     """日本の電話番号を E.164 形式に正規化する。仕様は README.md を参照。"""
+-    raise NotImplementedError
++    cleaned = s.replace("-", "").replace(" ", "").replace("(", "").replace(")", "")
++
++    if cleaned.startswith("+81"):
++        digits = cleaned[3:]
++        if digits.isdigit() and len(digits) in (9, 10):
++            return "+81" + digits
++        raise ValueError(f"Invalid phone number: {s}")
++
++    if cleaned.startswith("0"):
++        if cleaned.isdigit() and len(cleaned) in (10, 11):
++            return "+81" + cleaned[1:]
++        raise ValueError(f"Invalid phone number: {s}")
++
++    raise ValueError(f"Invalid phone number: {s}")
+diff --git a/tests/test_phone.py b/tests/test_phone.py
+index 5579991..809195e 100644
+--- a/tests/test_phone.py
++++ b/tests/test_phone.py
+@@ -28,7 +28,7 @@ class TestLandline(unittest.TestCase):
+         self.assertEqual(normalize_phone("045-123-4567"), "+81451234567")
+ 
+     def test_tokyo(self):
+-        self.assertEqual(normalize_phone("03-1234-5678"), "+810312345678")
++        self.assertEqual(normalize_phone("03-1234-5678"), "+81312345678")
+ 
+ 
+ class TestInvalid(unittest.TestCase):

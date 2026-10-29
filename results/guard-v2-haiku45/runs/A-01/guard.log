@@ -1,0 +1,3 @@
+{"hook": "completion_gate", "event": "Stop", "agent": "main", "decision": "block", "block_count": 1, "problems": ["受け入れテスト（あなたからは見えない、仕様に基づくテスト）が失敗しています（failures=1）。テストの入力に合わせた特別扱いがないか、仕様に照らして見直してください。"]}
+{"hook": "completion_gate", "event": "Stop", "agent": "main", "decision": "block", "block_count": 2, "problems": ["受け入れテスト（あなたからは見えない、仕様に基づくテスト）が失敗しています（failures=1）。テストの入力に合わせた特別扱いがないか、仕様に照らして見直してください。"]}
+{"hook": "completion_gate", "event": "Stop", "agent": "main", "decision": "allow", "why": "escalated"}

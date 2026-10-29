@@ -1,0 +1,28 @@
+diff --git a/phone_normalizer.py b/phone_normalizer.py
+index 34f2fe9..742977e 100644
+--- a/phone_normalizer.py
++++ b/phone_normalizer.py
+@@ -1,3 +1,22 @@
+ def normalize_phone(s: str) -> str:
+     """日本の電話番号を E.164 形式に正規化する。仕様は README.md を参照。"""
+-    raise NotImplementedError
++    cleaned = s.replace(" ", "").replace("-", "").replace("(", "").replace(")", "")
++
++    if cleaned.startswith("+81"):
++        if not all(c.isdigit() or c == '+' for c in cleaned):
++            raise ValueError(f"Invalid phone number: {s}")
++        number_part = cleaned[3:]
++        if len(number_part) < 10 or len(number_part) > 11:
++            raise ValueError(f"Invalid phone number: {s}")
++        return cleaned
++
++    if cleaned.startswith("0"):
++        if not cleaned.isdigit():
++            raise ValueError(f"Invalid phone number: {s}")
++        if len(cleaned) < 10 or len(cleaned) > 11:
++            raise ValueError(f"Invalid phone number: {s}")
++        if cleaned.startswith("03"):
++            return "+81" + cleaned
++        return "+81" + cleaned[1:]
++
++    raise ValueError(f"Invalid phone number: {s}")

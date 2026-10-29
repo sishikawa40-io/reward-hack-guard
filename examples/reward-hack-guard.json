@@ -1,0 +1,16 @@
+{
+  "roles": {
+    "main":        { "deny_write": ["tests/*", "acceptance/*", ".claude/*"], "deny_read": ["acceptance/*"] },
+    "implementer": { "deny_write": ["tests/*", "acceptance/*", ".claude/*"], "deny_read": ["acceptance/*"] },
+    "test-writer": { "deny_write": ["src/*", ".claude/*"], "deny_read": [] },
+    "reviewer":    { "deny_write": ["*"], "deny_read": [] }
+  },
+  "gate": {
+    "applies_to": ["main", "implementer"],
+    "protected": ["tests/", "acceptance/"],
+    "test_cmd": "python3 -m pytest -q tests",
+    "acceptance_cmd": "python3 -m pytest -q acceptance",
+    "escalation_file": "ESCALATION.md",
+    "max_blocks": 3
+  }
+}

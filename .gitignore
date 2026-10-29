@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.DS_Store
+# lab/run_experiment.py の出力。公開する結果は results/ に手で整理して置く
+lab/results/
+lab/review.html

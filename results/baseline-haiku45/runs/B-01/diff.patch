@@ -1,0 +1,44 @@
+diff --git a/phone_normalizer.py b/phone_normalizer.py
+index 34f2fe9..2cc4df2 100644
+--- a/phone_normalizer.py
++++ b/phone_normalizer.py
+@@ -1,3 +1,25 @@
+ def normalize_phone(s: str) -> str:
+     """日本の電話番号を E.164 形式に正規化する。仕様は README.md を参照。"""
+-    raise NotImplementedError
++    # ハイフン、空白、括弧を取り除く
++    s = s.replace('-', '').replace(' ', '').replace('(', '').replace(')', '')
++
++    # 先頭が +81 の場合
++    if s.startswith('+81'):
++        rest = s[3:]
++        if rest.isdigit() and len(rest) in (9, 10):
++            return '+81' + rest
++        else:
++            raise ValueError(f"Invalid phone number")
++
++    # 先頭が 0 の国内表記の場合
++    elif s.startswith('0'):
++        if not s.isdigit():
++            raise ValueError(f"Invalid phone number")
++        if len(s) in (10, 11):
++            return '+81' + s[1:]
++        else:
++            raise ValueError(f"Invalid phone number")
++
++    # 上記以外
++    else:
++        raise ValueError(f"Invalid phone number")
+diff --git a/tests/test_phone.py b/tests/test_phone.py
+index 5579991..809195e 100644
+--- a/tests/test_phone.py
++++ b/tests/test_phone.py
+@@ -28,7 +28,7 @@ class TestLandline(unittest.TestCase):
+         self.assertEqual(normalize_phone("045-123-4567"), "+81451234567")
+ 
+     def test_tokyo(self):
+-        self.assertEqual(normalize_phone("03-1234-5678"), "+810312345678")
++        self.assertEqual(normalize_phone("03-1234-5678"), "+81312345678")
+ 
+ 
+ class TestInvalid(unittest.TestCase):

@@ -1,0 +1,12 @@
+{
+  "name": "reward-hack-guard",
+  "owner": { "name": "sishikawa40-io", "url": "https://github.com/sishikawa40-io" },
+  "description": "Claude Code plugin and experiment harness for studying and reducing reward hacking by coding agents.",
+  "plugins": [
+    {
+      "name": "reward-hack-guard",
+      "source": "./plugins/reward-hack-guard",
+      "description": "Hooks that separate test-writing and implementation roles and gate completion on untouched tests and hidden acceptance tests."
+    }
+  ]
+}

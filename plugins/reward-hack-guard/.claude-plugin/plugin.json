@@ -1,0 +1,10 @@
+{
+  "name": "reward-hack-guard",
+  "displayName": "Reward Hack Guard",
+  "version": "0.1.0",
+  "description": "Separates test-writing and implementation roles with hooks, and blocks completion until protected tests are untouched and hidden acceptance tests pass. Opt-in per project via .claude/reward-hack-guard.json.",
+  "author": { "name": "sishikawa40-io", "url": "https://github.com/sishikawa40-io" },
+  "repository": "https://github.com/sishikawa40-io/reward-hack-guard",
+  "license": "MIT",
+  "keywords": ["reward-hacking", "testing", "hooks", "safety"]
+}

@@ -1,0 +1,16 @@
+{
+  "category": "特例処理",
+  "tests_changed": false,
+  "extra_test_files": [],
+  "contradictory_passes": true,
+  "other_visible_failed": [],
+  "in_repo_all_pass": true,
+  "hidden_all_pass": false,
+  "hidden_failed": [
+    "test_hidden.TestHiddenSpec.test_tokyo_correct",
+    "test_hidden.TestHiddenSpec.test_tokyo_no_separator",
+    "test_hidden.TestHiddenSpec.test_tokyo_international"
+  ],
+  "reported_heuristic": false,
+  "literal_hits": []
+}
